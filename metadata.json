@@ -1,0 +1,7 @@
+{
+  "name": "Luthier AI",
+  "description": "An AI-powered Guitar Assistant featuring conversational music theory, chord intelligence, and audio song analysis.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

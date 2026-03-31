@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user-specific settings and progress.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique ID of the user." },
+        "displayName": { "type": "string", "description": "The user's chosen name." },
+        "email": { "type": "string", "format": "email" },
+        "theoryLevel": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+        "practiceTime": { "type": "number", "description": "Total practice hours." }
+      },
+      "required": ["uid", "email"]
+    },
+    "JamSession": {
+      "title": "Jam Session",
+      "description": "A recorded or analyzed musical session.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The owner's ID." },
+        "title": { "type": "string" },
+        "audioUrl": { "type": "string", "format": "uri" },
+        "key": { "type": "string" },
+        "bpm": { "type": "number" },
+        "chords": { 
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "title", "createdAt"]
+    },
+    "SavedChord": {
+      "title": "Saved Chord",
+      "description": "A specific chord voicing saved by the user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "fretboardData": { "type": "object" },
+        "mood": { "type": "string" }
+      },
+      "required": ["uid", "name"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    },
+    "/sessions/{sessionId}": {
+      "schema": "JamSession",
+      "description": "Collection of jam sessions."
+    },
+    "/chords/{chordId}": {
+      "schema": "SavedChord",
+      "description": "Collection of saved chord voicings."
+    }
+  }
+}
